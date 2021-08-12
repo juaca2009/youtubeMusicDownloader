@@ -21,3 +21,9 @@ Instale las librerias ejecutando el siguiente comando:
 ```
 pip install -r requirements.txt
 ```
+## Ejecucion del Script
+Ejecute el fichero main.py para iniciar el script, debe poseer conexion a internet de lo contrario, 
+el script no permitira descargar canciones.
+```                                                                                                              
+python main.py                                                                                                          
+```  
