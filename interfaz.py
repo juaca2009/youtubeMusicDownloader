@@ -104,6 +104,7 @@ class interfaz():
                 else:
                     print(Fore.RED + "[ERROR]: " + Fore.RESET + "Formato de url incorrecto")
                 print("\n")
+                print(Fore.YELLOW + "------------------------------------------------------------------------------------------------------------------------------------------------") 
                 self.probarConexion()
                 print(Fore.BLUE + "\n[INFO]: " + Fore.RESET + "La ubicacion de descarga actual es: " + self.__sistema.get_directorioDescarga())
             else:
