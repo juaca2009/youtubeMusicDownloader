@@ -3,7 +3,7 @@ import requests, youtube_dl, subprocess
 class gestorDescargas():
     def __init__(self):
         self.__urlYoutube = "https://www.youtube.com/"
-        self.__verificadores = ["list=", "watch"]
+        self.__verificadores = ["list=", "watch", "youtube"]
 
     def getUrlYoutube(self):
         return self.__urlYoutube
@@ -25,5 +25,19 @@ class gestorDescargas():
         for i in _listaUrls:
             subprocess.call(["youtube-dl", "--extract-audio", "--audio-format", "wav", i.strip()])
 
+    def verificarUrl(self, _url):
+        if self.__verificadores[2] in _url:
+            if self.__verificadores[0] in _url and self.__verificadores[1] in _url:
+                return 1
+            elif self.__verificadores[0] in _url:
+                return 2
+            elif self.__verificadores[1] in _url:
+                return 3
+            elif "," in _url:
+                return 4
+            else:
+                return -1
+        else:
+            return -1
 
 
