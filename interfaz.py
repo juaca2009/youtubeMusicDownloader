@@ -29,12 +29,12 @@ class interfaz():
 
     def mensajeInicial(self):
         self.__sistema.limpiarPantalla() 
-        print(Fore.YELLOW + "--------------------------------------------------------------------------------------------") 
+        print(Fore.YELLOW + "------------------------------------------------------------------------------------------------------------------------------------------------") 
         print(Fore.YELLOW + art.text2art("Downloader", font="smslant"))
-        print(Fore.YELLOW + "--------------------------------------------------------------------------------------------") 
         print(Fore.CYAN + "\nCreado por: " + Fore.RESET + "Juan Camilo Hernandez Saavedra")
-        print(Fore.GREEN + "GitHub: " + Fore.RESET + "juaca2009")
+        print(Fore.GREEN + "GitHub: " + Fore.RESET + "https://github.com/juaca2009")
         print(Fore.MAGENTA + "Repositorio: " + Fore.RESET + "https://github.com/juaca2009/youtubeMusicDownloader")
+        print(Fore.YELLOW + "------------------------------------------------------------------------------------------------------------------------------------------------") 
         
 
     def probarConexion(self):
@@ -60,6 +60,21 @@ class interfaz():
                 else:
                     print(Fore.RED + "\n[ERROR]: " + Fore.RESET + "El directorio no existe, vuelva a intentarlo")
 
+    def descargarPlaylist(self, _url):
+        temp = self.__gestor.descargarCancion(_url, True)
+        if temp == False:
+            print(Fore.RED + "[ERROR]: " + Fore.RESET + "No se ha podido descargar la playlist, revise su conexion o la url")
+
+    def descargarCancion(self, _url):
+        temp = self.__gestor.descargarCancion(_url)
+        if temp == False:
+            print(Fore.RED + "[ERROR]: " + Fore.RESET + "No se ha podido descargar la cancion, revise su conexion o la url")
+
+    def descargarListaUrls(self, _urlList):
+        temp = self.__gestor.descargarCanciones(_urlList)
+        if temp == False:
+            print(Fore.RED + "[ERROR]: " + Fore.RESET + "No se ha podido descargar las canciones, revise su conexion o la url")
+
     def menuPrincipal(self):
         while self.getSalir() == False:
             print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Escriba exit para salir")
@@ -70,26 +85,27 @@ class interfaz():
                     res = input("Desea descargar la playlist entera? (y/n): ")
                     if res == "y":
                         print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar la playlist")
-                        self.__gestor.descargarCancion(url, True)
+                        self.descargarPlaylist(url)
                     elif res == "n":
                         print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar la cancion")
-                        self.__gestor.descargarCancion(url)
+                        self.descargarCancion(url)
                     else:
                         print(Fore.RED + "[ERROR]: " + Fore.RESET + "Respuesta invalida")
                 elif opt == 2:
                     print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar la playlist")
-                    self.__gestor.descargarCancion(url, True)
+                    self.descargarPlaylist(url)
                 elif opt == 3:
                     print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar la cancion")
-                    self.__gestor.descargarCancion(url)
+                    self.descargarCancion(url)
                 elif opt == 4:
                     urlList = url.split(",")
                     print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar las canciones")
-                    self.__gestor.descargarCanciones(urlList)
+                    self.descargarListaUrls(urlList)
                 else:
                     print(Fore.RED + "[ERROR]: " + Fore.RESET + "Formato de url incorrecto")
                 print("\n")
                 self.probarConexion()
+                print(Fore.BLUE + "\n[INFO]: " + Fore.RESET + "La ubicacion de descarga actual es: " + self.__sistema.get_directorioDescarga())
             else:
                 self.setSalir(True)
                 self.__sistema.limpiarPantalla()
