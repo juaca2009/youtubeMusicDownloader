@@ -13,6 +13,7 @@ mutagen==1.45.1
 pathvalidate==2.4.1
 Pillow==8.3.1
 pycryptodomex==3.10.1
+pydub==0.25.1
 pylev==1.4.0
 requests==2.26.0
 tomlkit==0.7.2
