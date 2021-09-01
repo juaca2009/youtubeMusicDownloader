@@ -1,4 +1,5 @@
 import platform, os 
+import subprocess
 
 class SistemaOperativo():
     def __init__(self):
@@ -40,6 +41,9 @@ class SistemaOperativo():
             os.system("cls")
         else:
             os.system("clear")
+
+    def eliminarCancion(self, _NombreCancion):
+        subprocess.call(["rm", _NombreCancion])
 
 if __name__ == "__main__":
     a = SistemaOperativo()
