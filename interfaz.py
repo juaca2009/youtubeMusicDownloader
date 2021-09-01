@@ -62,19 +62,13 @@ class interfaz():
                     print(Fore.RED + "\n[ERROR]: " + Fore.RESET + "El directorio no existe, vuelva a intentarlo")
 
     def descargarPlaylist(self, _url):
-        temp = self.__gestor.descargarCancion(_url, True)
-        if temp == False:
-            print(Fore.RED + "[ERROR]: " + Fore.RESET + "No se ha podido descargar la playlist, revise su conexion o la url")
+        self.__gestor.descargarCancion(_url, True)
 
     def descargarCancion(self, _url):
-        temp = self.__gestor.descargarCancion(_url)
-        if temp == False:
-            print(Fore.RED + "[ERROR]: " + Fore.RESET + "No se ha podido descargar la cancion, revise su conexion o la url")
+        self.__gestor.descargarCancion(_url)
 
     def descargarListaUrls(self, _urlList):
-        temp = self.__gestor.descargarCanciones(_urlList)
-        if temp == False:
-            print(Fore.RED + "[ERROR]: " + Fore.RESET + "No se ha podido descargar las canciones, revise su conexion o la url")
+        self.__gestor.descargarCanciones(_urlList)
 
     def menuPrincipal(self):
         while self.getSalir() == False:

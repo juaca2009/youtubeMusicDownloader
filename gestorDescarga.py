@@ -17,27 +17,13 @@ class gestorDescargas():
     
     def descargarCancion(self, _url, esPlaylist = False):
         if not esPlaylist:
-            try:
-                subprocess.call(["youtube-dl", "--no-playlist", "--extract-audio", "--audio-format", "wav", "--ignore-errors", _url])
-            except subprocess.CalledProcessError as error:
-                return False
-            else:
-                return True
+            subprocess.call(["youtube-dl", "--no-playlist", "--extract-audio", "--audio-format", "wav", "--ignore-errors", _url])
         else:
-            try:
-                subprocess.call(["youtube-dl", "--yes-playlist", "--extract-audio", "--audio-format", "wav", "--ignore-errors", _url])
-            except subprocess.CalledProcessError as error:
-                return False
-            else:
-                return True
+            subprocess.call(["youtube-dl", "--yes-playlist", "--extract-audio", "--audio-format", "wav", "--ignore-errors", _url])
 
     def descargarCanciones(self, _listaUrls):
         for i in _listaUrls:
-            try:
-                subprocess.call(["youtube-dl", "--extract-audio", "--audio-format", "wav", "--ignore-errors", i.strip()])
-            except subprocess.CalledProcessError as error:
-                return False
-        return True
+            subprocess.call(["youtube-dl", "--extract-audio", "--audio-format", "wav", "--ignore-errors", i.strip()])
 
     def verificarUrl(self, _url):
         if self.__verificadores[2] in _url:
