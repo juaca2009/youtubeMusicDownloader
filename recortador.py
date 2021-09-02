@@ -3,7 +3,7 @@ import math
 import re
 
 class gestorRecortes():
-    def __init__(self, _segundoInicio, _segundoFinal, _ruta):
+    def __init__(self, _ruta, _segundoInicio = 120, _segundoFinal = 150):
         self.__cancion = None
         self.__nombreCancion = None
         self.__rutaCarpeta = _ruta
@@ -58,3 +58,4 @@ class gestorRecortes():
                 cancionesRecortadas.append(i)
         return cancionesRecortadas
 
+    
