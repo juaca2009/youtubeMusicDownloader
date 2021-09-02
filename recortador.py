@@ -49,3 +49,12 @@ class gestorRecortes():
         audioRecortado = self.__cancion[self.__segInicio:self.__segFinal]
         audioRecortado.export(self.getRuta() + "/" + self.getNombreCancion() + "rec" + ".wav", format="wav")
 
+    def RecortarListaCanciones(self, _listaCanciones):
+        cancionesRecortadas = list()
+        for i in _listaCanciones:
+            self.setCancion(i)
+            if self.getDuracionCancion() > 30.0:
+                self.recortarCancion()
+                cancionesRecortadas.append(i)
+        return cancionesRecortadas
+
