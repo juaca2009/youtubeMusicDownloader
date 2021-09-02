@@ -59,5 +59,3 @@ class gestorRecortes():
                 self.recortarCancion()
                 cancionesRecortadas.append(i)
         return cancionesRecortadas
-
-    
