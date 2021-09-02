@@ -45,6 +45,13 @@ class SistemaOperativo():
     def eliminarCancion(self, _NombreCancion):
         subprocess.call(["rm", _NombreCancion])
 
+    def eliminarListaCanciones(self, _listaCanciones):
+        for i in _listaCanciones:
+            self.eliminarCancion(i)
+
+    def obtenerListaCanciones(self):
+        return [arch.name for arch in os.scandir(self.get_directorioDescarga()) if arch.is_file() and ".wav" in arch.name]
+
 if __name__ == "__main__":
     a = SistemaOperativo()
     print(a.get_directorioScript())
