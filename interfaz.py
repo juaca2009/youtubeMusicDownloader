@@ -50,22 +50,50 @@ class interfaz():
         boolt = False
         while boolt == False:
             print(Fore.BLUE + "\n[INFO]: " + Fore.RESET + "La ubicacion de descarga actual es: " + self.__sistema.get_directorioScript())
-            print(Fore.RED + "[ADVERTENCIA]: " + Fore.RESET + "TENGA EN CUENTA QUE TODAS LAS CANCIONES CON UNA DURACION MAYOR A 30 SEGUNDOS")
+            print(Fore.RED + "[ADVERTENCIA]: " + Fore.RESET + "TENGA EN CUENTA QUE TODAS LAS CANCIONES CON UNA DURACION MAYOR A LOS SEGUNDOS ESTABLECIDOS")
             print("UBICADAS EN EL DIRECTORIO QUE ELIJA, SERAN RECORTADAS UNA VEZ REALIZE UNA DESCARGA.")
             ruta = input("Ingrese la ruta de descarga (Deje el espacio vacio para descargar en la ubicacion actual): ")
             if ruta == "":
                 boolt = True
-                self.__recorte = gestorRecortes(120, 150, self.__sistema.get_directorioScript())
                 print(Fore.BLUE + "\n[INFO]: " + Fore.RESET + "La ubicacion de descarga actual es: " + self.__sistema.get_directorioScript())
             else:
                 if self.__sistema.directorioExiste(ruta):
                     self.__sistema.set_directorioDescarga(ruta)
-                    self.__recorte = gestorRecortes(120, 150, self.__sistema.get_directorioDescarga())
                     self.__sistema.moverDirDescarga()
                     boolt = True
                     print(Fore.BLUE + "\n[INFO]: " + Fore.RESET + "La ubicacion de descarga actual es: " + self.__sistema.get_directorioDescarga())
                 else:
                     print(Fore.RED + "\n[ERROR]: " + Fore.RESET + "El directorio no existe, vuelva a intentarlo")
+
+    def solicitarRangoRecorte(self):
+        boolt = False
+        while boolt == False:
+            print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Por defecto el rango de recorte se encuentra entre los segundos 120 - 150 (2min-2:30min)")
+            rango = input("Ingrese el rango de recorte en segundos separados por un espacio (ej: 120 150) deje el espacio vacio para valor por defecto: ")
+            if rango == "":
+                self.__recorte = gestorRecortes(self.__sistema.get_directorioDescarga())
+            else:
+                if self.verificarEntradaRango(rango.split()):
+                    temp = rango.split()
+                    self.__recorte = gestorRecortes(self.__sistema.get_directorioDescarga(), int(temp[0]), int(temp[1]))
+                    boolt = True
+                else:
+                    print(Fore.RED + "\n[ERROR]: " + Fore.RESET + "Rango de recorte invalido")
+
+            
+            
+    def verificarEntradaRango(self, _listaRango):
+        if len(_listaRango) == 2:
+            if _listaRango[0].isdigit() and _listaRango[1].isdigit():
+                rMin, rMax = int(_listaRango[0]), int(_listaRango[1])
+                if rMin > 0 and rMax > 0 and rMax - rMin > 0:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+        else:
+            return False
 
     def descargarPlaylist(self, _url):
         self.__gestor.descargarCancion(_url, True)
