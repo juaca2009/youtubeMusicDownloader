@@ -1,6 +1,6 @@
 from sistemaOperativo import SistemaOperativo
 from gestorDescarga import gestorDescargas
-from recortador import gestorRecortes
+from recortador import gestorRecortes, DURACION_DE_RECORTE 
 from colorama import Fore
 import art
 
@@ -88,7 +88,7 @@ class interfaz():
         if len(_listaRango) == 2:
             if _listaRango[0].isdigit() and _listaRango[1].isdigit():
                 rMin, rMax = int(_listaRango[0]), int(_listaRango[1])
-                if rMin > 0 and rMax > 0 and rMax - rMin > 0:
+                if rMin >= 0 and rMax > 0 and rMax - rMin == DURACION_DE_RECORTE:
                     return True
                 else:
                     return False
