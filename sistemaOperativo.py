@@ -50,7 +50,7 @@ class SistemaOperativo():
             self.eliminarCancion(i)
 
     def obtenerListaCanciones(self):
-        return [arch.name for arch in os.scandir(self.get_directorioDescarga()) if arch.is_file() and ".wav" in arch.name]
+        return [arch.name for arch in os.scandir(self.get_directorioDescarga()) if arch.is_file() and not("-recortado.wav" in arch.name)]
 
 if __name__ == "__main__":
     a = SistemaOperativo()
