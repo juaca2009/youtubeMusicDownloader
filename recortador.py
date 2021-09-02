@@ -2,6 +2,8 @@ from pydub import AudioSegment
 import math
 import re
 
+DURACION_DE_RECORTE = 30.0
+
 class gestorRecortes():
     def __init__(self, _ruta, _segundoInicio = 120, _segundoFinal = 150):
         self.__cancion = None
@@ -47,13 +49,13 @@ class gestorRecortes():
 
     def recortarCancion(self):
         audioRecortado = self.__cancion[self.__segInicio:self.__segFinal]
-        audioRecortado.export(self.getRuta() + "/" + self.getNombreCancion() + "rec" + ".wav", format="wav")
+        audioRecortado.export(self.getRuta() + "/" + self.getNombreCancion() + "-recortado" + ".wav", format="wav")
 
     def RecortarListaCanciones(self, _listaCanciones):
         cancionesRecortadas = list()
         for i in _listaCanciones:
             self.setCancion(i)
-            if self.getDuracionCancion() > 120.0:
+            if self.getDuracionCancion() > DURACION_DE_RECORTE:
                 self.recortarCancion()
                 cancionesRecortadas.append(i)
         return cancionesRecortadas
