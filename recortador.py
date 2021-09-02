@@ -53,7 +53,7 @@ class gestorRecortes():
         cancionesRecortadas = list()
         for i in _listaCanciones:
             self.setCancion(i)
-            if self.getDuracionCancion() > 30.0:
+            if self.getDuracionCancion() > 120.0:
                 self.recortarCancion()
                 cancionesRecortadas.append(i)
         return cancionesRecortadas
