@@ -1,5 +1,6 @@
 from sistemaOperativo import SistemaOperativo
 from gestorDescarga import gestorDescargas
+from recortador import gestorRecortes
 from colorama import Fore
 import art
 
@@ -7,6 +8,7 @@ class interfaz():
     def __init__(self):
         self.__sistema = SistemaOperativo()
         self.__gestor = gestorDescargas()
+        self.__recorte = None
         self.__salir = False
 
     def getSistema(self):
@@ -48,13 +50,17 @@ class interfaz():
         boolt = False
         while boolt == False:
             print(Fore.BLUE + "\n[INFO]: " + Fore.RESET + "La ubicacion de descarga actual es: " + self.__sistema.get_directorioScript())
+            print(Fore.RED + "[ADVERTENCIA]: " + Fore.RESET + "TENGA EN CUENTA QUE TODAS LAS CANCIONES CON UNA DURACION MAYOR A 30 SEGUNDOS")
+            print("UBICADAS EN EL DIRECTORIO QUE ELIJA, SERAN RECORTADAS UNA VEZ REALIZE UNA DESCARGA.")
             ruta = input("Ingrese la ruta de descarga (Deje el espacio vacio para descargar en la ubicacion actual): ")
             if ruta == "":
                 boolt = True
+                self.__recorte = gestorRecortes(120, 150, self.__sistema.get_directorioScript())
                 print(Fore.BLUE + "\n[INFO]: " + Fore.RESET + "La ubicacion de descarga actual es: " + self.__sistema.get_directorioScript())
             else:
                 if self.__sistema.directorioExiste(ruta):
                     self.__sistema.set_directorioDescarga(ruta)
+                    self.__recorte = gestorRecortes(120, 150, self.__sistema.get_directorioDescarga())
                     self.__sistema.moverDirDescarga()
                     boolt = True
                     print(Fore.BLUE + "\n[INFO]: " + Fore.RESET + "La ubicacion de descarga actual es: " + self.__sistema.get_directorioDescarga())
@@ -92,12 +98,20 @@ class interfaz():
                 elif opt == 3:
                     print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar la cancion")
                     self.descargarCancion(url)
+                    
                 elif opt == 4:
                     urlList = url.split(",")
                     print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar las canciones")
                     self.descargarListaUrls(urlList)
                 else:
                     print(Fore.RED + "[ERROR]: " + Fore.RESET + "Formato de url incorrecto")
+                print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Leyendo canciones del directorio")
+                listaCanciones = self.__sistema.obtenerListaCanciones()
+                print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Recortando Canciones...")
+                cancionesRecortadas = self.__recorte.RecortarListaCanciones(listaCanciones)
+                print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Eliminando Copias...")
+                print(cancionesRecortadas)
+                self.__sistema.eliminarListaCanciones(cancionesRecortadas)
                 print("\n")
                 print(Fore.YELLOW + "------------------------------------------------------------------------------------------------------------------------------------------------") 
                 self.probarConexion()
