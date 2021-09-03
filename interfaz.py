@@ -68,7 +68,7 @@ class interfaz():
     def solicitarRangoRecorte(self):
         boolt = False
         while boolt == False:
-            print(Fore.BLUE + "\n[INFO]: " + Fore.RESET + "Por defecto el rango de recorte se encuentra entre los segundos 120 - 150 (2min-2:30min)")
+            print(Fore.BLUE + "\n[INFO]: " + Fore.RESET + "Por defecto el rango de recorte se encuentra entre los segundos 120 - 150 (2min-2:30min) el rango de recorte es de 30 segundos")
             rango = input("Ingrese el rango de recorte en segundos separados por un espacio (ej: 120 150) deje el espacio vacio para valor por defecto: ")
             if rango == "":
                 self.__recorte = gestorRecortes(self.__sistema.get_directorioDescarga())
