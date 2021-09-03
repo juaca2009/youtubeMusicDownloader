@@ -106,6 +106,16 @@ class interfaz():
     def descargarListaUrls(self, _urlList):
         self.__gestor.descargarCanciones(_urlList)
 
+    def interfazRecorteCanciones(self):
+        print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Leyendo canciones del directorio")
+        listaCanciones = self.__sistema.obtenerListaCanciones()
+        print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Recortando Canciones...")
+        cancionesRecortadas = self.__recorte.RecortarListaCanciones(listaCanciones)
+        print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Eliminando Copias...")
+        print(cancionesRecortadas)
+        self.__sistema.eliminarListaCanciones(cancionesRecortadas)
+
+
     def menuPrincipal(self):
         while self.getSalir() == False:
             print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Escriba exit para salir")
@@ -122,56 +132,26 @@ class interfaz():
                     if res == "y":
                         print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar la playlist")
                         self.descargarPlaylist(url)
-                        print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Leyendo canciones del directorio")
-                        listaCanciones = self.__sistema.obtenerListaCanciones()
-                        print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Recortando Canciones...")
-                        cancionesRecortadas = self.__recorte.RecortarListaCanciones(listaCanciones)
-                        print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Eliminando Copias...")
-                        print(cancionesRecortadas)
-                        self.__sistema.eliminarListaCanciones(cancionesRecortadas)
+                        self.interfazRecorteCanciones()
                     elif res == "n":
                         print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar la cancion")
                         self.descargarCancion(url)
-                        print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Leyendo canciones del directorio")
-                        listaCanciones = self.__sistema.obtenerListaCanciones()
-                        print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Recortando Canciones...")
-                        cancionesRecortadas = self.__recorte.RecortarListaCanciones(listaCanciones)
-                        print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Eliminando Copias...")
-                        print(cancionesRecortadas)
-                        self.__sistema.eliminarListaCanciones(cancionesRecortadas)
+                        self.interfazRecorteCanciones()
                     else:
                         print(Fore.RED + "[ERROR]: " + Fore.RESET + "Respuesta invalida")
                 elif opt == 2:
                     print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar la playlist")
                     self.descargarPlaylist(url)
-                    print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Leyendo canciones del directorio")
-                    listaCanciones = self.__sistema.obtenerListaCanciones()
-                    print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Recortando Canciones...")
-                    cancionesRecortadas = self.__recorte.RecortarListaCanciones(listaCanciones)
-                    print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Eliminando Copias...")
-                    print(cancionesRecortadas)
-                    self.__sistema.eliminarListaCanciones(cancionesRecortadas)
+                    self.interfazRecorteCanciones()
                 elif opt == 3:
                     print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar la cancion")
                     self.descargarCancion(url)
-                    print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Leyendo canciones del directorio")
-                    listaCanciones = self.__sistema.obtenerListaCanciones()
-                    print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Recortando Canciones...")
-                    cancionesRecortadas = self.__recorte.RecortarListaCanciones(listaCanciones)
-                    print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Eliminando Copias...")
-                    print(cancionesRecortadas)
-                    self.__sistema.eliminarListaCanciones(cancionesRecortadas)
+                    self.interfazRecorteCanciones()
                 elif opt == 4:
                     urlList = url.split(",")
                     print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Se va a descargar las canciones")
                     self.descargarListaUrls(urlList)
-                    print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Leyendo canciones del directorio")
-                    listaCanciones = self.__sistema.obtenerListaCanciones()
-                    print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Recortando Canciones...")
-                    cancionesRecortadas = self.__recorte.RecortarListaCanciones(listaCanciones)
-                    print(Fore.BLUE + "[INFO]: " + Fore.RESET + "Eliminando Copias...")
-                    print(cancionesRecortadas)
-                    self.__sistema.eliminarListaCanciones(cancionesRecortadas)
+                    self.interfazRecorteCanciones()
                 else:
                     print(Fore.RED + "[ERROR]: " + Fore.RESET + "Formato de url incorrecto")
                 print("\n")
